@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>toDo app </title>
-    <h1>ToDo List App</h1>
+    <link rel="stylesheet" type="text/css" href="toso.css" media="screen"/>
 </head>
 
 <body>
@@ -39,11 +39,13 @@
             cell1.innerHTML = dataList;
         }
     </script>
-    <form>
-        <input type="text" id="textone"/>
-
-    </form>
-    <input type="submit" onclick="showInput()"><br />
+    
+    <section class="container">
+        <header class="header">
+            <h1>ToDo List App</h1>
+        </header>
+        <input type="text" id="textarea">
+        <input type="submit" onclick="showInput()"><br />
         <p><span id='display'>
             <table id="myTable" width="100%" cellspacing="0" cellpadding="1">
                 <tr>
@@ -53,6 +55,8 @@
             </table>
             </span>
         </p>
+    </section>
+  
 </body>
 
 </html>
