@@ -5,18 +5,148 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>toDo app </title>
-    <link rel="stylesheet" type="text/css" href="toso.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="toso.css" media="screen" />
+
 </head>
 
 <body>
+
+
+
     <script>
-        var data = new Array();
-       
+        var data = [];
         function showInput() {
-            data.push(document.getElementById('myTable').innerHTML = document.getElementById('textone').value);
-            document.getElementById('textone').value = '';
-            tableData();
+            var container = document.getElementById('display');
+            if (event.keyCode == 13 || event.which == 13) {
+                var inputText = document.getElementById('textarea').value;
+                document.getElementById('textarea').value = "";
+                data.push(inputText);
+                var pval = "";
+               
+            for (var i = 0; i < data.length; i++) {
+                pval += data[i] ;
+            }
+    
+            }
+            else {
+                return false;
+            }
+           display();
+         
+    
         }
+      
+        function display() {
+            var ul=document.createElement("ul");
+            document.body.appendChild(ul);
+           
+            ul.setAttribute("id","todo-list");
+            // newUl=document.getElementById('todo-list');
+            var container=document.getElementById("display");
+            container.appendChild(ul);
+            for(var i=0;i<data.length; i++) {
+                var dd= data[i];
+               
+              
+                var listItem=document.createElement("li");
+               
+                listItem.innerHTML=dd;
+
+                ul.appendChild(listItem);
+                // container.appendChild(ul);
+                container.innerHTML=ul.innerHTML;
+                // document.getElementById('display').appendChild(ul);
+                
+            }
+           
+           
+        }
+
+        // function createMylist() {
+        //                 console.log("Its working");
+        //                 var listLength = pval.length;
+        //                 if (listLength > 0) {
+        //                     var myList = document.createElement("ul");
+
+        //                     myList.className = "list";
+        //                     for (var j = 0; j < listLength; j++) {
+        //                         var listItem = document.createElement("li");
+
+        //                         // create a text node to store value
+        //                         var listValue = document.createTextNode(pval[j]);
+
+        //                         // append the value in the list item
+        //                         listItem.appendChild(listValue);
+
+        //                         // append the list item in the list
+        //                         myList.appendChild(listItem);
+        //                     }
+        //                     container.appendChild(myList);
+        //                     console.log(myList);
+
+
+        //                 }
+        //                 else {
+        //                     return false;
+        //                 }
+
+        //             } 
+
+
+        // function showInput() {
+
+
+        //         if (event.keyCode == 13 || event.which == 13){
+        //             data.push(document.getElementById('display').innerHTML = document.getElementById('textarea').value);
+        //             console.log(data);
+        //             document.getElementById('textarea').value = "";
+
+        //         }
+        //         else {
+        //             console.log("you did something wrong");
+        //         }
+
+        //     }
+            // function listItem() {
+            //     var text = document.getElementById('textarea').value;
+            //     var listNode = document.getElementById('todo-list');
+            //     var liNode = document.createElement("LI");
+            //     var textNode = document.createTextNode(text);
+            //     liNode.appendChild(textNode);
+            //     listNode.appendChild(liNode);
+            // }
+
+
+
+            //  function showInput(event) {
+            //      document.getElementById('textarea').onclick=function(){
+            //          myfunction();
+            //      };
+            //     document.getElementById('display').addEventListener("onkeypress",myfunction);
+            //     function myfunction(event){
+            //         if (event.keyCode == 13 || event.which == 13) {
+            //             // event.preventDefault();
+            //             // var input = document.getElementById('textarea').value;
+            //             // document.getElementById('display').innerHTML=input
+            //             console.log('Hiii');
+
+            //         }
+
+            //     }
+
+
+            // }
+
+
+
+
+        // var data = new Array();
+
+        // function showInput() {
+        //     data.push(document.getElementById('view').innerHTML = document.getElementById('textone').value);
+        //     document.getElementById('textone').value = '';
+        //     tableData();
+        // }
 
         // function display() {
 
@@ -24,40 +154,41 @@
         //     var newData =data.join('\r\n');
         //     dataList +=  "<li>" + newData + "</li>";
 
-            
+
         //     document.getElementById('display').innerHTML =dataList;
-            
+
         // }
-        function tableData() {
-            var table = document.getElementById('myTable');
-            var dataList="";
-            var newData =data.join("\r\n");
-            dataList +=  "<li>" + newData + "</li>";
-            var row = table.insertRow(0);
-            var cell1 = row.insertCell(0);
-            
-            cell1.innerHTML = dataList;
-        }
+        // function tableData() {
+        //     var table = document.getElementById('myTable');
+        //     var dataList="";
+        //     var newData =data.join("\r\n");
+        //     dataList +=  "<li>" + newData + "</li>";
+        //     var row = table.insertRow(0);
+        //     var cell1 = row.insertCell(0);
+
+        //     cell1.innerHTML = dataList;
+        // }
     </script>
-    
+
     <section class="container">
         <header class="header">
             <h1>todos</h1>
         </header>
-        <input type="text" id="textarea" placeholder="What needs to be done?" autofocus>
-       
+        <input type="text" id="textarea" placeholder="What needs to be done?" autofocus onkeypress="showInput()" />
     </section>
-    <section class="display">
+
+    <section id="display">
+        <ul id="todo-list"></ul>
         <input type="checkbox">
         <label for="listfor">
             Mark all as completed</label>
-        <ul class="todo-list"></ul>
+        <ul id="todo-list">
+            <li>hello</li>
+        </ul>
         <div class="view">
-            <!-- <input type="checkbox" class="innerelement">
-            <button class="destroy"></button> -->
+
         </div>
     </section>
-  
 </body>
 
 </html>
