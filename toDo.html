@@ -10,7 +10,7 @@
 </head>
 
 <body>
-
+:
     <script>
         var data = [];
 
@@ -20,6 +20,8 @@
                 document.getElementById('textarea').value = "";
                 data.push(inputText);
                 display(inputText);
+                createID();
+             
             }
             else {
                 return false;
@@ -34,7 +36,13 @@
 
             ul.appendChild(listItem);
         }
+       function createID() {
+            var element = document.querySelectorAll('#todo-list li');
 
+            element.forEach((e, i) => {
+                e.setAttribute("data-id", (i + 1));
+            });
+        }
 
       
     </script>
