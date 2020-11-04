@@ -39,7 +39,10 @@
             checkbox.setAttribute("class","toggle");
             var label=document.createElement('label');
             label.appendChild(document.createTextNode(val));
-         
+            // creating the destroy button
+            var button =document.createElement('input');
+            button.setAttribute("type","button");
+            button.setAttribute("class","destroy")
 
 
             //create the div element inside the li elemnt
@@ -47,6 +50,7 @@
             divEle.setAttribute("class","view");
             divEle.appendChild(checkbox);
             divEle.appendChild(label);
+            label.appendChild(button);
             listItem.appendChild(divEle);
             ul.appendChild(listItem);
             
