@@ -9,61 +9,173 @@
 
 </head>
 
-<body>
-:
+<body >
+    
     <script>
+      
         var data = [];
+      
+        
 
         function addTodo() {
-            if (event.keyCode == 13 || event.which == 13) {
-                var inputText = document.getElementById('textarea').value;
-                document.getElementById('textarea').value = "";
-                data.push(inputText);
-                display(inputText);
-                createID();
+            var inputText = document.getElementById('textarea').value;
+    
+             if (event.keyCode == 13 || event.which == 13 ) {
+               
+             if (inputText == "" || inputText == " "){
+                    
+                 
+                    return false;
+                   
+                    // document.getElementById('textarea').disabled=true;
+                   
+                }
              
-            }
-            else {
+                        
+                else  {
+                    
+                    document.getElementById('textarea').value = "";
+                    data.push(inputText.trim());
+                    
+                  
+                    display(inputText);
+                    localStorage.setItem('todo-items',JSON.stringify(data));
+                    // location.reload();
+                    // for(let i=0;i<localStorage.length;i++) {
+                    //     const key =localStorage.key(i);
+                    //     const value= localStorage.getItem(key);
+                    //     document.getElementById('display').innerHTML =`${key}` +`${value}`;
+                    // }
+                    // localStorage.getItem('textarea');
+                    createID();
+                   
+                    
+                }
+
+            
+        
+             }
+             else if( event.which == 32) {
+                 
+                 if(inputText == " ") {
+                    blockSpace(event);
+                 }
+             }
+
+
+          
+
+        }
+        //blocking the space tab .. when we add the white space it automatically blocs the space 
+        function blockSpace(event){
+            if(event.which == 32){
+                event.preventDefault();
                 return false;
             }
+
         }
+
+
+        // function textControl (element, event)
+        //     {
+        //         if(event.keyCode==9 || event.which==9)
+        //         {
+        //             event.preventDefault();
+        //             var s = element.selectionStart;
+        //             element.value = element.value.substring(0,element.selectionStart) + "\t" + element.value.substring(element.selectionEnd);
+        //             element.selectionEnd = s+1; 
+        //         }
+        //     }
 
         function display(val) {
-            var ul = document.getElementById("todo-list");
-            var listItem = document.createElement("li");
-            // listItem.innerHTML = val;
+                    var ul = document.getElementById("todo-list");
+                    var listItem = document.createElement("li");
+                    // listItem.innerHTML = val;
 
-            //creating the checkbox 
-            var checkbox=document.createElement('input');
-            checkbox.type='checkbox';
-            checkbox.setAttribute("class","toggle");
-            var label=document.createElement('label');
-            label.appendChild(document.createTextNode(val));
-            // creating the destroy button
-            var button =document.createElement('input');
-            button.setAttribute("type","button");
-            button.setAttribute("class","destroy")
+                    //creating the checkbox 
+                    var checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+                    checkbox.setAttribute("class", "toggle");
+                    var label = document.createElement('label');
+                    label.appendChild(document.createTextNode(val));
+                    // creating the destroy button
+                    var button = document.createElement('input');
+                    button.setAttribute("type", "button");
+                    button.setAttribute("class", "destroy")
 
 
-            //create the div element inside the li elemnt
-            var divEle=document.createElement("div");
-            divEle.setAttribute("class","view");
-            divEle.appendChild(checkbox);
-            divEle.appendChild(label);
-            divEle.appendChild(button);
-            listItem.appendChild(divEle);
-            ul.appendChild(listItem);
-            
-        }
-       function createID() {
+                    //create the div element inside the li elemnt
+                    var divEle = document.createElement("div");
+                    divEle.setAttribute("class", "view");
+                    divEle.appendChild(checkbox);
+                    divEle.appendChild(label);
+                    divEle.appendChild(button);
+                    listItem.appendChild(divEle);
+                    ul.appendChild(listItem);
+                  
+                
+           }
+        function createID() {
             var element = document.querySelectorAll('#todo-list li');
 
             element.forEach((e, i) => {
                 e.setAttribute("data-id", (i + 1));
             });
         }
-       
+
+        //store the data on the local storage
       
+        // const inpKey=document.getElementById('textarea').value;
+        // inpKey.onkeyup =function(event){
+        //         if(event.keyCode == 13){
+        //             const output=document.getElementById('display');
+        //             const key = inpKey.value;
+        //             console.log(key);
+        //             if(key){
+        //                 localStorage.setItem("key",key);
+        //                 location.reload();
+        //             }
+        //     for(let i=0;i<localStorage.length;i++){
+        //         const key =localStorage.key(i);
+        //         const value=localStorage.getItem(key);
+
+        //         output.innerHTML+= `${value}`;
+        //     }
+        //         }
+        //     }
+        
+
+    
+
+
+
+        //store the data on page after the page refresh 
+        // var storedItem=localStorage.getItem("storedItem");
+        // function save(){
+        //     var Item=document.getElementById('textarea').value;
+        //     localStorage.setItem('storedItem',Item);
+        //      var x=document.getElementById('display').innerHTML=Item +"hii";
+        //     console.log(x);
+        // }
+
+        // function getValue(){
+        //     var Item=document.getElementById('textarea').value;
+        //     localStorage.getItem("storedItem");
+        //     document.getElementById('todo-list').innerHTML=Item;
+        // }
+
+        window.onload =function(){
+            console.log("huu");
+            const output=document.getElementById('todo-list');
+            var items = localStorage.getItem('todo-items');
+            items=JSON.parse(items);
+            for(let i=0;i<items.length;i++) {
+                output.innerHTML = items +items[i];
+            }
+            console.log(items);
+        }
+
+    
     </script>
 
     <section class="container">
@@ -86,7 +198,7 @@
         <ul class="filters">
 
         </ul>
-        <button class="clear-comleted" style="display: none;"></button>
+        <button class="clear-completed" style="display: none;"></button>
 
     </footer>
 </body>
