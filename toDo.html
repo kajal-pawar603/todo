@@ -91,6 +91,7 @@
         function display(val) {
             var ul = document.getElementById("todo-list");
             var listItem = document.createElement("li");
+            listItem.setAttribute("class","completed");
             // listItem.innerHTML = val;
 
             //creating the checkbox 
@@ -103,12 +104,17 @@
             var button = document.createElement('button');
             button.setAttribute("type", "destroy");
             button.setAttribute("class", "destroy");
+            //when we click the destroy button that specific value is removed from the list item.
+            // 
             button.onclick = function () {
                 ul.removeChild(listItem);
                 console.log(val)
+                // we get all the data from localStorage
                 var items = localStorage.getItem('todo-items');
                 var data = JSON.parse(items);
+                // filter method return the data added in list except destroy button selected value
                 data=data.filter(item =>item !==  val);
+                // we have to set the data in localStorage for not displaying the previously added data?
                 localStorage.setItem('todo-items',JSON.stringify(data));
             }
 
