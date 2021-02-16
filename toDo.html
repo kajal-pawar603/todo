@@ -48,8 +48,11 @@
                     // }
                     // localStorage.getItem('textarea');
                     createID();
-
-
+                    var x=document.getElementById('todo-list').getElementsByTagName('li').length;
+                    console.log(x);
+                    document.getElementById('todo-count').innerHTML= x +" "+ "items left"
+                
+                    
                 }
 
 
@@ -67,7 +70,7 @@
           
 
         
-        //blocking the space tab .. when we add the white space it automatically blocs the space 
+        //blocking the space tab .. when we add the white space it automatically blocks the space 
         function blockSpace(event) {
             if (event.which == 32) {
                 event.preventDefault();
@@ -97,6 +100,7 @@
             //creating the checkbox 
             var checkbox = document.createElement('input');
             checkbox.type = 'checkbox';
+            checkbox.name="checkbox";
             checkbox.setAttribute("class", "toggle");
             var label = document.createElement('label');
             label.appendChild(document.createTextNode(val));
@@ -116,6 +120,13 @@
                 data=data.filter(item =>item !==  val);
                 // we have to set the data in localStorage for not displaying the previously added data?
                 localStorage.setItem('todo-items',JSON.stringify(data));
+
+                var x=document.getElementById('todo-list').getElementsByTagName('li').length;
+                    console.log(x);
+                document.getElementById('todo-count').innerHTML= x +" " +"items left";
+                
+       
+                
             }
 
                 //create the div element inside the li elemnt
@@ -135,6 +146,11 @@
                 element.forEach((e, i) => {
                     e.setAttribute("data-id", (i + 1));
                 });
+            }
+
+            //find len of ul
+            function ulLength(){
+               
             }
 
             //store the data on the local storage
@@ -192,7 +208,9 @@
 
                 }
 
-
+                var x=document.getElementById('todo-list').getElementsByTagName('li').length;
+                    console.log(x);
+                    document.getElementById('todo-count').innerHTML= x +" "+ "items left"
 
             }
 
@@ -220,9 +238,9 @@
     </section>
 
     <footer class="footer" style="display: block;">
-        <span class="todo-count">
+        <span id="todo-count">
             <strong></strong>
-            "items left"
+            items left
         </span>
         <ul class="filters">
             <li><a class="selected" href="#/"></a>All</li>
