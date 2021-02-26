@@ -48,11 +48,11 @@
                     // }
                     // localStorage.getItem('textarea');
                     createID();
-                    var x=document.getElementById('todo-list').getElementsByTagName('li').length;
+                    var x = document.getElementById('todo-list').getElementsByTagName('li').length;
                     console.log(x);
-                    document.getElementById('todo-count').innerHTML= x +" "+ "items left"
-                
-                    
+                    document.getElementById('todo-count').innerHTML = x + " " + "items left"
+
+
                 }
 
 
@@ -64,12 +64,14 @@
                     blockSpace(event);
                 }
             }
+
         }
 
-        
-          
 
-        
+
+
+
+
         //blocking the space tab .. when we add the white space it automatically blocks the space 
         function blockSpace(event) {
             if (event.which == 32) {
@@ -94,14 +96,60 @@
         function display(val) {
             var ul = document.getElementById("todo-list");
             var listItem = document.createElement("li");
-            listItem.setAttribute("class","completed");
+            listItem.setAttribute("class", "completed");
             // listItem.innerHTML = val;
 
             //creating the checkbox 
             var checkbox = document.createElement('input');
             checkbox.type = 'checkbox';
-            checkbox.name="checkbox";
+            checkbox.name = "checkbox";
+            checkbox.id = 'check'
             checkbox.setAttribute("class", "toggle");
+
+            checkbox.onclick = function () {
+                var checkboxes = document.getElementsByName('checkbox');
+                var x = document.getElementById('todo-list').getElementsByTagName('li').length;
+                for( var checkbox of checkboxes) {
+                    if (checkbox.checked == true) {
+                    x = x - 1;
+
+                    document.getElementById('todo-count').innerHTML = x + " " + "items left";
+                }
+                else {
+                    console.log('Its not checked');
+                   
+                }
+                }
+               
+
+
+
+
+
+                // while(checkboxes.checked !== true) {
+                //     if(checkboxes.checked) {
+                //          
+                //  }
+                //     else {
+                //     console.log(" not checked");
+
+                //     }
+
+                // }
+
+
+
+
+
+
+
+
+
+
+            }
+
+
+
             var label = document.createElement('label');
             label.appendChild(document.createTextNode(val));
             // creating the destroy button
@@ -117,107 +165,147 @@
                 var items = localStorage.getItem('todo-items');
                 var data = JSON.parse(items);
                 // filter method return the data added in list except destroy button selected value
-                data=data.filter(item =>item !==  val);
+                data = data.filter(item => item !== val);
                 // we have to set the data in localStorage for not displaying the previously added data?
-                localStorage.setItem('todo-items',JSON.stringify(data));
+                localStorage.setItem('todo-items', JSON.stringify(data));
 
-                var x=document.getElementById('todo-list').getElementsByTagName('li').length;
-                    console.log(x);
-                document.getElementById('todo-count').innerHTML= x +" " +"items left";
-                
-       
-                
-            }
+                var x = document.getElementById('todo-list').getElementsByTagName('li').length;
+                console.log(x);
 
-                //create the div element inside the li elemnt
-                var divEle = document.createElement("div");
-                divEle.setAttribute("class", "view");
-                divEle.appendChild(checkbox);
-                divEle.appendChild(label);
-                divEle.appendChild(button);
-                listItem.appendChild(divEle);
-                ul.appendChild(listItem);
+                var checkboxes = document.getElementsByName('checkbox');
+                var x = document.getElementById('todo-list').getElementsByTagName('li').length;
+                document.getElementById('todo-count').innerHTML = x + " " + "items left";
+                // for( var checkbox of checkboxes) {
+                //     if (checkbox.checked == true) {
+                //     x = x - 1;
 
+                //     document.getElementById('todo-count').innerHTML = x + " " + "items left";
+                // }
+                //     else {
+                //         return false;
+                //     }
 
-            }
-            function createID() {
-                var element = document.querySelectorAll('#todo-list li');
-
-                element.forEach((e, i) => {
-                    e.setAttribute("data-id", (i + 1));
-                });
-            }
-
-            //find len of ul
-            function ulLength(){
-               
-            }
-
-            //store the data on the local storage
-
-            // const inpKey=document.getElementById('textarea').value;
-            // inpKey.onkeyup =function(event){
-            //         if(event.keyCode == 13){
-            //             const output=document.getElementById('display');
-            //             const key = inpKey.value;
-            //             console.log(key);
-            //             if(key){
-            //                 localStorage.setItem("key",key);
-            //                 location.reload();
-            //             }
-            //     for(let i=0;i<localStorage.length;i++){
-            //         const key =localStorage.key(i);
-            //         const value=localStorage.getItem(key);
-
-            //         output.innerHTML+= `${value}`;
-            //     }
-            //         }
-            //     }
-
-
-
-
-
-
-            //store the data on page after the page refresh 
-            // var storedItem=localStorage.getItem("storedItem");
-            // function save(){
-            //     var Item=document.getElementById('textarea').value;
-            //     localStorage.setItem('storedItem',Item);
-            //      var x=document.getElementById('display').innerHTML=Item +"hii";
-            //     console.log(x);
-            // }
-
-            // function getValue(){
-            //     var Item=document.getElementById('textarea').value;
-            //     localStorage.getItem("storedItem");
-            //     document.getElementById('todo-list').innerHTML=Item;
-            // }
-
-            //storing the data on loacal storage after refreshing the page
-            window.onload = function () {
-
-                console.log("huu");
-                const output = document.getElementById('todo-list');
-                var items = localStorage.getItem('todo-items');
-                var data = JSON.parse(items);
-                for (let i = 0; i < data.length; i++) {
-                    //   output.innerHTML = items +items[i];
-                    display(data[i]);
-
-
-                }
-
-                var x=document.getElementById('todo-list').getElementsByTagName('li').length;
-                    console.log(x);
-                    document.getElementById('todo-count').innerHTML= x +" "+ "items left"
 
             }
 
+            //create the div element inside the li elemnt
+            var divEle = document.createElement("div");
+            divEle.setAttribute("class", "view");
+            divEle.appendChild(checkbox);
+            divEle.appendChild(label);
+            divEle.appendChild(button);
+            listItem.appendChild(divEle);
+            ul.appendChild(listItem);
+
+
+        }
+        function createID() {
+            var element = document.querySelectorAll('#todo-list li');
+
+            element.forEach((e, i) => {
+                e.setAttribute("data-id", (i + 1));
+            });
+        }
+
+
+        // checkbox is chcked or not
+        // function checkboxCheck(event) {
+        //     var checkboxes=document.getElementsByTagName('check');
+        //     if(event.checked) {
+        //         event.preventDefault();
+        //         for(var i=0;i<checkboxes.length;i++) {
+        //             checkboxes[i].checked = true;
+        //             console.log("its checked");
+        //         }
+
+        //     }
+        //     else {
+
+        //         console.log("not checked");
+        //     }
+
+        // }
+
+
+        // function check(){
+        //     var check = document.getElementsByTagName('check');
+        //     if(check.checked) {
+        //         for(var i=0;i<check.length;i++) {
+        //             check[0].style.color='#f00';
+        //         }
+        //         console.log('its checkressadsad');
+        //     }
+        //     else {
+        //         return false;
+        //     }
+        // }
+
+        //store the data on the local storage
+
+        // const inpKey=document.getElementById('textarea').value;
+        // inpKey.onkeyup =function(event){
+        //         if(event.keyCode == 13){
+        //             const output=document.getElementById('display');
+        //             const key = inpKey.value;
+        //             console.log(key);
+        //             if(key){
+        //                 localStorage.setItem("key",key);
+        //                 location.reload();
+        //             }
+        //     for(let i=0;i<localStorage.length;i++){
+        //         const key =localStorage.key(i);
+        //         const value=localStorage.getItem(key);
+
+        //         output.innerHTML+= `${value}`;
+        //     }
+        //         }
+        //     }
 
 
 
-        // remove the list item after clicking the button
+
+
+
+        //store the data on page after the page refresh 
+        // var storedItem=localStorage.getItem("storedItem");
+        // function save(){
+        //     var Item=document.getElementById('textarea').value;
+        //     localStorage.setItem('storedItem',Item);
+        //      var x=document.getElementById('display').innerHTML=Item +"hii";
+        //     console.log(x);
+        // }
+
+        // function getValue(){
+        //     var Item=document.getElementById('textarea').value;
+        //     localStorage.getItem("storedItem");
+        //     document.getElementById('todo-list').innerHTML=Item;
+        // }
+
+        //storing the data on loacal storage after refreshing the page
+        window.onload = function () {
+
+            console.log("huu");
+            const output = document.getElementById('todo-list');
+            var items = localStorage.getItem('todo-items');
+            var data = JSON.parse(items);
+            for (let i = 0; i < data.length; i++) {
+                //   output.innerHTML = items +items[i];
+                display(data[i]);
+
+
+            }
+            //display the item in list after reloading the page
+            var x = document.getElementById('todo-list').getElementsByTagName('li').length;
+            console.log(x);
+            document.getElementById('todo-count').innerHTML = x + " " + "items left"
+
+
+        }
+
+
+
+
+
 
 
 
@@ -246,6 +334,7 @@
             <li><a class="selected" href="#/"></a>All</li>
             <li><a class="" href="#/active">Active</a></li>
             <li><a class="" href="#/completed">Completed</a></li>
+
         </ul>
         <button class="clear-completed" style="display: none;"></button>
 
