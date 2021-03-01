@@ -111,14 +111,18 @@
                 var x = document.getElementById('todo-list').getElementsByTagName('li').length;
                 for( var checkbox of checkboxes) {
                     if (checkbox.checked == true) {
-                    x = x - 1;
-
-                    document.getElementById('todo-count').innerHTML = x + " " + "items left";
-                }
-                else {
-                    console.log('Its not checked');
-                   
-                }
+                    x -=1;
+                    var y=x;
+                    document.getElementById('todo-count').innerHTML = y + " " + "items left";
+                    }
+                    else {
+                       
+                        console.log('Its not checked');
+                        document.getElementById('todo-count').innerHTML = x + " " + "items left";
+                    
+                    }
+               
+                
                 }
                
 
@@ -168,23 +172,39 @@
                 data = data.filter(item => item !== val);
                 // we have to set the data in localStorage for not displaying the previously added data?
                 localStorage.setItem('todo-items', JSON.stringify(data));
-
-                var x = document.getElementById('todo-list').getElementsByTagName('li').length;
-                console.log(x);
-
                 var checkboxes = document.getElementsByName('checkbox');
-                var x = document.getElementById('todo-list').getElementsByTagName('li').length;
-                document.getElementById('todo-count').innerHTML = x + " " + "items left";
-                // for( var checkbox of checkboxes) {
-                //     if (checkbox.checked == true) {
-                //     x = x - 1;
+                for( var checkbox of checkboxes) {
+                    if (checkbox.checked == true) {
+                    x -=1;
+                    var y=x;
+                    document.getElementById('todo-count').innerHTML = y + " " + "items left";
+                    }
+                    else {
+                       
+                        console.log('Its not checked');
+                        document.getElementById('todo-count').innerHTML = x + " " + "items left";
+                    
+                    }
+               
+                
+                }
+                // var x = document.getElementById('todo-list').getElementsByTagName('li').length;
+                // console.log(x);
+
+                // var checkboxes = document.getElementsByName('checkbox');
+                // var x = document.getElementById('todo-list').getElementsByTagName('li').length;
+                // if (checkbox.checked == true) {
+                //     x -=1;
 
                 //     document.getElementById('todo-count').innerHTML = x + " " + "items left";
-                // }
-                //     else {
-                //         return false;
                 //     }
-
+                //     else {
+                //         console.log('Its not checked');
+                    
+                //     }
+                
+                document.getElementById('todo-count').innerHTML = x + " " + "items left";
+              
 
             }
 
